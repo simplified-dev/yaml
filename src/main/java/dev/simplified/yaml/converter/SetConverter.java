@@ -19,7 +19,7 @@ public class SetConverter extends YamlConverter {
         java.util.Set<Object> newSet = new HashSet<>();
 
         try {
-            newSet = (java.util.Set<Object>) Reflection.of(type).newInstance();
+            newSet = (java.util.Set<Object>) new Reflection<>(type).newInstance();
         } catch (Exception ignore) {
         }
 

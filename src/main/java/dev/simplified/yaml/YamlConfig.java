@@ -91,7 +91,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
             this.internalLoad(clazz.getSuperclass());
 
         boolean save = false;
-        Reflection<?> refClass = Reflection.of(clazz);
+        Reflection<?> refClass = new Reflection<>(clazz);
         refClass.setProcessingSuperclass(false);
 
         for (FieldAccessor<?> accessor : refClass.getFields()) {
@@ -130,7 +130,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
         if (!clazz.getSuperclass().equals(YamlMap.class))
             this.internalSave(clazz.getSuperclass());
 
-        Reflection<?> refClass = Reflection.of(clazz);
+        Reflection<?> refClass = new Reflection<>(clazz);
         refClass.setProcessingSuperclass(false);
 
         for (FieldAccessor<?> accessor : refClass.getFields()) {

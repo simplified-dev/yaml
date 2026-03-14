@@ -18,9 +18,9 @@ public class ConfigConverter extends YamlConverter {
         Class<?> enclosingClass = type.getEnclosingClass();
 
         if (enclosingClass != null)
-            return Reflection.of(type).newInstance(newInstance(enclosingClass));
+            return new Reflection<>(type).newInstance(newInstance(enclosingClass));
 
-        return Reflection.of(type).newInstance();
+        return new Reflection<>(type).newInstance();
     }
 
     @Override

@@ -64,7 +64,7 @@ public abstract class YamlMap {
         if (!clazz.getSuperclass().equals(YamlMap.class))
             this.loadFromMap(section, clazz.getSuperclass());
 
-        Reflection<?> refClass = Reflection.of(clazz);
+        Reflection<?> refClass = new Reflection<>(clazz);
         refClass.setProcessingSuperclass(false);
 
         for (FieldAccessor<?> accessor : refClass.getFields()) {
@@ -89,7 +89,7 @@ public abstract class YamlMap {
             returnMap.putAll(map);
         }
 
-        Reflection<?> refClass = Reflection.of(clazz);
+        Reflection<?> refClass = new Reflection<>(clazz);
         refClass.setProcessingSuperclass(false);
 
         for (FieldAccessor<?> accessor : refClass.getFields()) {

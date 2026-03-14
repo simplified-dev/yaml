@@ -19,7 +19,7 @@ public class ListConverter extends YamlConverter {
         java.util.List<Object> newList = new ArrayList<>();
 
         try {
-            newList = (java.util.List<Object>) Reflection.of(type).newInstance();
+            newList = (java.util.List<Object>) new Reflection<>(type).newInstance();
         } catch (Exception ignore) {
         }
 

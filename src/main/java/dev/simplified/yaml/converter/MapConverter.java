@@ -21,7 +21,7 @@ public class MapConverter extends YamlConverter {
 
         if (genericType != null) {
             try {
-                map = (java.util.Map<Object, Object>) Reflection.of((Class<?>) genericType.getRawType()).newInstance();
+                map = (java.util.Map<Object, Object>) new Reflection<>((Class<?>) genericType.getRawType()).newInstance();
             } catch (ReflectionException e) {
                 map = new HashMap<>();
             }
@@ -65,7 +65,7 @@ public class MapConverter extends YamlConverter {
             }
         } else {
             try {
-                map = (java.util.Map<Object, Object>) Reflection.of(type).newInstance();
+                map = (java.util.Map<Object, Object>) new Reflection<>(type).newInstance();
             } catch (ReflectionException e) {
                 map = new HashMap<>();
             }

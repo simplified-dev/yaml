@@ -80,7 +80,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
                 this.configFile.createNewFile();
                 this.save();
             } catch (IOException ex) {
-                throw new InvalidConfigurationException(ex, "Could not create new empty config!");
+                throw new InvalidConfigurationException(ex, "Could not create new empty config");
             }
         } else
             this.load();
@@ -108,7 +108,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
                     this.converter.fromConfig(this, accessor, this.root, path.get());
                 } catch (Exception ex) {
                     if (!this.isSuppressingFailedConversions())
-                        throw new InvalidConfigurationException(ex, "Could not set field %s.", accessor.getName());
+                        throw new InvalidConfigurationException(ex, "Could not set field %s", accessor.getName());
                 }
             } else {
                 try {
@@ -117,7 +117,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
                     save = true;
                 } catch (Exception ex) {
                     if (!this.isSuppressingFailedConversions())
-                        throw new InvalidConfigurationException(ex, "Could not get field %s.", accessor.getName());
+                        throw new InvalidConfigurationException(ex, "Could not get field %s", accessor.getName());
                 }
             }
         }
@@ -158,7 +158,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
                 this.converter.fromConfig(this, accessor, root, path.get());
             } catch (Exception ex) {
                 if (!this.isSuppressingFailedConversions())
-                    throw new InvalidConfigurationException(ex, "Could not save field %s!", accessor.getName());
+                    throw new InvalidConfigurationException(ex, "Could not save field %s", accessor.getName());
             }
         }
     }
@@ -238,7 +238,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
                 this.watchKey = this.configFile.toPath().getParent().register(this.watchService, StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_DELETE);
                 this.taskId = SimplifiedApi.getScheduler().scheduleAsync(this, 0, 250).getId();
             } catch (Exception ex) {
-                throw new RuntimeException("Unable to start watch service!", ex);
+                throw new RuntimeException("Unable to start watch service", ex);
             }
         }
     }

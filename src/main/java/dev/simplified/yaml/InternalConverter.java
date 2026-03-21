@@ -43,13 +43,13 @@ public class InternalConverter {
         try {
             converters.add(converter.getConstructor(InternalConverter.class).newInstance(this));
         } catch (NoSuchMethodException nsmException) {
-            throw new InvalidConverterException(nsmException, "Converter does not implement a constructor which takes the InternalConverter instance.");
+            throw new InvalidConverterException(nsmException, "Converter does not implement a constructor which takes the InternalConverter instance");
         } catch (InvocationTargetException intException) {
-            throw new InvalidConverterException(intException, "Converter could not be invoked.");
+            throw new InvalidConverterException(intException, "Converter could not be invoked");
         } catch (InstantiationException insException) {
-            throw new InvalidConverterException(insException, "Converter could not be instantiated.");
+            throw new InvalidConverterException(insException, "Converter could not be instantiated");
         } catch (IllegalAccessException ilaException) {
-            throw new InvalidConverterException(ilaException, "Converter does not implement a public Constructor which takes the InternalConverter instance.");
+            throw new InvalidConverterException(ilaException, "Converter does not implement a public Constructor which takes the InternalConverter instance");
         }
     }
 

@@ -30,7 +30,7 @@ public abstract class ConfigMapper extends YamlMap {
     transient ConfigSection root;
 
     protected ConfigMapper(File configDir, String fileName, Iterable<String> header) {
-        if (StringUtil.isEmpty(fileName)) throw new IllegalArgumentException("Filename cannot be null!");
+        if (StringUtil.isEmpty(fileName)) throw new IllegalArgumentException("Filename cannot be null");
         this.configFile = new File(configDir, String.format("config/%s%s", fileName, (fileName.endsWith(".yml") ? "" : ".yml")));
         ConcurrentList<String> headerList = Concurrent.newList();
         header.forEach(headerList::add);
@@ -94,7 +94,7 @@ public abstract class ConfigMapper extends YamlMap {
             if (object != null)
                 convertMapsToSections((Map<?, ?>) object, this.root);
         } catch (Exception ex) {
-            throw new InvalidConfigurationException(ex, "Could not load YML.");
+            throw new InvalidConfigurationException(ex, "Could not load YML");
         }
     }
 
@@ -171,7 +171,7 @@ public abstract class ConfigMapper extends YamlMap {
 
             fileWriter.write(writeLines.toString());
         } catch (IOException ex) {
-            throw new InvalidConfigurationException(ex, "Could not save YML.");
+            throw new InvalidConfigurationException(ex, "Could not save YML");
         }
     }
 

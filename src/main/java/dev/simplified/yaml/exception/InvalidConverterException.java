@@ -30,7 +30,7 @@ public class InvalidConverterException extends YamlException {
     /**
      * Constructs a new {@code InvalidConverterException} with the specified cause and detail message.
      *
-     * @param cause   the underlying throwable that caused this exception
+     * @param cause the underlying throwable that caused this exception
      * @param message the detail message
      */
     public InvalidConverterException(@NotNull Throwable cause, @NotNull String message) {
@@ -41,7 +41,7 @@ public class InvalidConverterException extends YamlException {
      * Constructs a new {@code InvalidConverterException} with a formatted detail message.
      *
      * @param message the format string
-     * @param args    the format arguments
+     * @param args the format arguments
      */
     public InvalidConverterException(@NotNull @PrintFormat String message, @Nullable Object... args) {
         super(message, args);
@@ -50,9 +50,9 @@ public class InvalidConverterException extends YamlException {
     /**
      * Constructs a new {@code InvalidConverterException} with the specified cause and a formatted detail message.
      *
-     * @param cause   the underlying throwable that caused this exception
+     * @param cause the underlying throwable that caused this exception
      * @param message the format string
-     * @param args    the format arguments
+     * @param args the format arguments
      */
     public InvalidConverterException(@NotNull Throwable cause, @NotNull @PrintFormat String message, @Nullable Object... args) {
         super(cause, message, args);

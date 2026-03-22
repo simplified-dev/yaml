@@ -32,7 +32,7 @@ public class YamlException extends IoException {
     /**
      * Constructs a new {@code YamlException} with the specified cause and detail message.
      *
-     * @param cause   the underlying throwable that caused this exception
+     * @param cause the underlying throwable that caused this exception
      * @param message the detail message
      */
     public YamlException(@NotNull Throwable cause, @NotNull String message) {
@@ -43,7 +43,7 @@ public class YamlException extends IoException {
      * Constructs a new {@code YamlException} with a formatted detail message.
      *
      * @param message the format string
-     * @param args    the format arguments
+     * @param args the format arguments
      */
     public YamlException(@NotNull @PrintFormat String message, @Nullable Object... args) {
         super(message, args);
@@ -52,9 +52,9 @@ public class YamlException extends IoException {
     /**
      * Constructs a new {@code YamlException} with the specified cause and a formatted detail message.
      *
-     * @param cause   the underlying throwable that caused this exception
+     * @param cause the underlying throwable that caused this exception
      * @param message the format string
-     * @param args    the format arguments
+     * @param args the format arguments
      */
     public YamlException(@NotNull Throwable cause, @NotNull @PrintFormat String message, @Nullable Object... args) {
         super(cause, message, args);

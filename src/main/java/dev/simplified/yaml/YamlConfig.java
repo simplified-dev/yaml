@@ -1,8 +1,8 @@
 package dev.simplified.yaml;
 
 import dev.simplified.util.SystemUtil;
-import dev.simplified.collection.concurrent.Concurrent;
-import dev.simplified.collection.concurrent.ConcurrentSet;
+import dev.simplified.collection.Concurrent;
+import dev.simplified.collection.ConcurrentSet;
 import dev.simplified.yaml.annotation.Flag;
 import dev.simplified.yaml.converter.YamlConverter;
 import dev.simplified.yaml.exception.InvalidConfigurationException;

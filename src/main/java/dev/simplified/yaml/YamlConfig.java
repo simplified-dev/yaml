@@ -202,7 +202,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
                                 this.reload();
                                 break;
                             } catch (Exception ex) {
-                                Thread.sleep(1000);
+                                try { Thread.sleep(1000); } catch (InterruptedException ignore) { };
                             }
                         }
 

@@ -1,9 +1,9 @@
-package dev.sbs.api.io.yaml.converter;
+package dev.simplified.yaml.converter;
 
-import dev.sbs.api.io.yaml.ConfigSection;
-import dev.sbs.api.io.yaml.InternalConverter;
-import dev.sbs.api.reflection.Reflection;
-import dev.sbs.api.reflection.exception.ReflectionException;
+import dev.simplified.yaml.ConfigSection;
+import dev.simplified.yaml.InternalConverter;
+import dev.simplified.reflection.Reflection;
+import dev.simplified.reflection.exception.ReflectionException;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;

@@ -1,16 +1,15 @@
-package dev.sbs.api.io.yaml;
+package dev.simplified.yaml;
 
-import dev.sbs.api.SimplifiedApi;
-import dev.sbs.api.collection.concurrent.Concurrent;
-import dev.sbs.api.collection.concurrent.ConcurrentSet;
-import dev.sbs.api.io.yaml.annotation.Flag;
-import dev.sbs.api.io.yaml.converter.YamlConverter;
-import dev.sbs.api.io.yaml.exception.InvalidConfigurationException;
-import dev.sbs.api.reflection.Reflection;
-import dev.sbs.api.reflection.accessor.FieldAccessor;
-import dev.sbs.api.scheduler.Scheduler;
-import dev.sbs.api.util.StringUtil;
-import dev.sbs.api.util.mutable.Mutable;
+import dev.simplified.util.SystemUtil;
+import dev.simplified.collection.concurrent.Concurrent;
+import dev.simplified.collection.concurrent.ConcurrentSet;
+import dev.simplified.yaml.annotation.Flag;
+import dev.simplified.yaml.converter.YamlConverter;
+import dev.simplified.yaml.exception.InvalidConfigurationException;
+import dev.simplified.reflection.Reflection;
+import dev.simplified.reflection.accessor.FieldAccessor;
+import dev.simplified.util.StringUtil;
+import dev.simplified.util.mutable.Mutable;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -28,7 +27,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
     protected static final ConcurrentSet<Class<? extends YamlConverter>> GLOBAL_CUSTOM_CONVERTERS = Concurrent.newSet();
 
     private transient boolean suppressFailedConversions = false;
-    private transient long taskId = -1;
+    private transient volatile Thread watcherThread;
     private transient WatchService watchService;
     private transient WatchKey watchKey;
     private transient boolean reloadProcessing = false;
@@ -38,7 +37,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
     }
 
     public YamlConfig(@NotNull String fileName, @NotNull Iterable<String> header) {
-        this(fileName, SimplifiedApi.getCurrentDirectory(), header);
+        this(fileName, SystemUtil.getCurrentDirectory(), header);
     }
 
     public YamlConfig(@NotNull String fileName, @NotNull File configDir, @NotNull String... header) {
@@ -203,7 +202,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
                                 this.reload();
                                 break;
                             } catch (Exception ex) {
-                                Scheduler.sleep(1000);
+                                Thread.sleep(1000);
                             }
                         }
 
@@ -232,11 +231,16 @@ public class YamlConfig extends ConfigMapper implements Runnable {
     }
 
     public void startWatcher() {
-        if (this.taskId == -1) {
+        if (this.watcherThread == null) {
             try {
                 this.watchService = FileSystems.getDefault().newWatchService();
                 this.watchKey = this.configFile.toPath().getParent().register(this.watchService, StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_DELETE);
-                this.taskId = SimplifiedApi.getScheduler().scheduleAsync(this, 0, 250).getId();
+                this.watcherThread = Thread.startVirtualThread(() -> {
+                    while (!Thread.currentThread().isInterrupted()) {
+                        this.run();
+                        try { Thread.sleep(250); } catch (InterruptedException e) { break; }
+                    }
+                });
             } catch (Exception ex) {
                 throw new RuntimeException("Unable to start watch service", ex);
             }
@@ -244,9 +248,9 @@ public class YamlConfig extends ConfigMapper implements Runnable {
     }
 
     public void stopWatcher() {
-        if (this.taskId != -1) {
-            SimplifiedApi.getScheduler().cancel(this.taskId);
-            this.taskId = -1;
+        if (this.watcherThread != null) {
+            this.watcherThread.interrupt();
+            this.watcherThread = null;
             this.watchKey.cancel();
 
             try {

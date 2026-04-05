@@ -1,16 +1,16 @@
-package dev.sbs.api.io.yaml;
+package dev.simplified.yaml;
 
-import dev.sbs.api.io.yaml.annotation.Flag;
-import dev.sbs.api.io.yaml.converter.ArrayConverter;
-import dev.sbs.api.io.yaml.converter.ConfigConverter;
-import dev.sbs.api.io.yaml.converter.EnumConverter;
-import dev.sbs.api.io.yaml.converter.ListConverter;
-import dev.sbs.api.io.yaml.converter.MapConverter;
-import dev.sbs.api.io.yaml.converter.PrimitiveConverter;
-import dev.sbs.api.io.yaml.converter.SetConverter;
-import dev.sbs.api.io.yaml.converter.YamlConverter;
-import dev.sbs.api.io.yaml.exception.InvalidConverterException;
-import dev.sbs.api.reflection.accessor.FieldAccessor;
+import dev.simplified.yaml.annotation.Flag;
+import dev.simplified.yaml.converter.ArrayConverter;
+import dev.simplified.yaml.converter.ConfigConverter;
+import dev.simplified.yaml.converter.EnumConverter;
+import dev.simplified.yaml.converter.ListConverter;
+import dev.simplified.yaml.converter.MapConverter;
+import dev.simplified.yaml.converter.PrimitiveConverter;
+import dev.simplified.yaml.converter.SetConverter;
+import dev.simplified.yaml.converter.YamlConverter;
+import dev.simplified.yaml.exception.InvalidConverterException;
+import dev.simplified.reflection.accessor.FieldAccessor;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;

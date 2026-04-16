@@ -3,8 +3,8 @@ package dev.simplified.yaml;
 import dev.simplified.collection.Concurrent;
 import dev.simplified.collection.ConcurrentList;
 import dev.simplified.collection.linked.ConcurrentLinkedMap;
-import dev.simplified.yaml.exception.InvalidConfigurationException;
 import dev.simplified.util.StringUtil;
+import dev.simplified.yaml.exception.InvalidConfigurationException;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -34,7 +34,7 @@ public abstract class ConfigMapper extends YamlMap {
         this.configFile = new File(configDir, String.format("config/%s%s", fileName, (fileName.endsWith(".yml") ? "" : ".yml")));
         ConcurrentList<String> headerList = Concurrent.newList();
         header.forEach(headerList::add);
-        this.header = headerList.toUnmodifiableList();
+        this.header = headerList.toUnmodifiable();
         DumperOptions dumperOptions = new DumperOptions();
         dumperOptions.setIndent(2);
         dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);

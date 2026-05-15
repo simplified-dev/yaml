@@ -1,8 +1,8 @@
 package dev.simplified.yaml;
 
 import dev.simplified.collection.Concurrent;
+import dev.simplified.collection.ConcurrentLinkedMap;
 import dev.simplified.collection.ConcurrentList;
-import dev.simplified.collection.linked.ConcurrentLinkedMap;
 import dev.simplified.util.StringUtil;
 import dev.simplified.yaml.exception.InvalidConfigurationException;
 import org.yaml.snakeyaml.DumperOptions;

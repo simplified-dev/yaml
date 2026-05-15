@@ -265,7 +265,7 @@ public class YamlConfig extends ConfigMapper implements Runnable {
      * <p>
      * Used to manually edit the passed root node when you updated the config.
      *
-     * @param section The root ConfigSection with all sub-nodes.
+     * @param section The root ConfigSection with all sub-nodes
      */
     public boolean update(ConfigSection section) throws InvalidConfigurationException {
         return false;
